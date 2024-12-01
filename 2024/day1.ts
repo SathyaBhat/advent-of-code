@@ -9,7 +9,6 @@ export function day1() {
     left.push(Number(a));
     right.push(Number(b));
   });
-
   left.sort((a, b) => a - b);
   right.sort((a, b) => a - b);
   const sum = left.reduce((acc, val, i) => acc + Math.abs(right[i] - val), 0);
