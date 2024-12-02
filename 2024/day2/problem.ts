@@ -24,15 +24,17 @@ function isAllDecreasing(level: number[]) {
   }
   return true;
 }
-function solvePart1(fileContents: string) {
-  const levels = fileContents
+
+function getReports(fileContents: string) {
+  return fileContents
     .split("\n")
     .filter((line) => line.trim() !== "")
     .map((line) => line.split(" ").map(Number));
-
+}
+function solvePart1(fileContents: string) {
+  const reports = getReports(fileContents);
   let safeCount = 0;
-  console.log(levels);
-  levels.forEach((level) => {
+  reports.forEach((level) => {
     const isSafe = isAllIncreasing(level) || isAllDecreasing(level);
     if (isSafe) {
       safeCount += 1;
@@ -41,11 +43,31 @@ function solvePart1(fileContents: string) {
   console.log(`\tProblem 1: Answer is ${chalk.green(safeCount)}`);
 }
 
-function solvePart2(left: number[], right: number[]) {
-  console.log(`\tProblem 2: Answer is ${chalk.green("TBD")}`);
+function solvePart2(fileContents: string) {
+  const levels = getReports(fileContents);
+  let safeCount = 0;
+  levels.forEach((level) => {
+    const isSafe = isAllIncreasing(level) || isAllDecreasing(level);
+    if (isSafe) {
+      safeCount += 1;
+      return;
+    }
+
+    for (let i = 0; i < level.length; i++) {
+      // for every level we have, omit the ith report and use the spread operator to combine the other parts
+      const skippedLevel = [...level.slice(0, i), ...level.slice(i + 1)];
+      if (isAllIncreasing(skippedLevel) || isAllDecreasing(skippedLevel)) {
+        safeCount += 1;
+        // no need to check for other levels if a safe report is achieved by a skipped level
+        break;
+      }
+    }
+  });
+  console.log(`\tProblem 2: Answer is ${chalk.green(safeCount)}`);
 }
 export function solveDay2() {
   const fileContents = readInputData("./2024/day2/input.txt");
   console.log(`Day 2`);
   solvePart1(fileContents);
+  solvePart2(fileContents);
 }
