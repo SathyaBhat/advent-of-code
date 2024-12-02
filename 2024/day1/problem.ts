@@ -1,5 +1,5 @@
-import * as fs from "fs";
 import chalk from "chalk";
+import * as fs from "fs";
 
 function sortInputs(fileContents: string) {
   const left: number[] = [];
