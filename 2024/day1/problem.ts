@@ -31,7 +31,7 @@ function solvePart2(left: number[], right: number[]) {
   console.log(`\tProblem 2: similarity score is ${chalk.green(similarityScore)}`);
 }
 export function solveDay1() {
-  const fileContents = fs.readFileSync("./2024/input.txt", "utf-8");
+  const fileContents = fs.readFileSync("./2024/day1/input.txt", "utf-8");
   const { left, right } = sortInputs(fileContents);
   console.log(`Day 1`);
   solvePart1(left, right);

@@ -1,4 +1,4 @@
-import { solveDay1 } from "./2024/day1";
+import { solveDay1 } from "./2024/day1/problem";
 import chalk from "chalk";
 
 async function main() {
