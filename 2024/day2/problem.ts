@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import * as fs from "fs";
 
-function readInputData(fileName: string) {
+export function readInputData(fileName: string) {
   return fs.readFileSync(fileName, "utf-8");
 }
 
@@ -25,13 +25,13 @@ function isAllDecreasing(level: number[]) {
   return true;
 }
 
-function getReports(fileContents: string) {
+export function getReports(fileContents: string) {
   return fileContents
     .split("\n")
     .filter((line) => line.trim() !== "")
     .map((line) => line.split(" ").map(Number));
 }
-function solvePart1(fileContents: string) {
+export function solvePart1(fileContents: string) {
   const reports = getReports(fileContents);
   let safeCount = 0;
   reports.forEach((level) => {
@@ -41,9 +41,10 @@ function solvePart1(fileContents: string) {
     }
   });
   console.log(`\tProblem 1: Answer is ${chalk.green(safeCount)}`);
+  return safeCount;
 }
 
-function solvePart2(fileContents: string) {
+export function solvePart2(fileContents: string) {
   const levels = getReports(fileContents);
   let safeCount = 0;
   levels.forEach((level) => {
@@ -64,6 +65,7 @@ function solvePart2(fileContents: string) {
     }
   });
   console.log(`\tProblem 2: Answer is ${chalk.green(safeCount)}`);
+  return safeCount;
 }
 export function solveDay2() {
   const fileContents = readInputData("./2024/day2/input.txt");
